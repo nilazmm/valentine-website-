@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found 💕</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+    :root {
+      --pink: #ff6f91;
+      --pink-dark: #ff4f78;
+      --text: #4b3040;
+      --card: rgba(255,255,255,.78);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Poppins", sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, #ffe5ec, #e9e3ff, #dff7ff);
+      background-size: 300% 300%;
+      animation: gradientShift 12s ease infinite;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      transition: background 1s ease;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .card {
+      position: relative;
+      width: min(92vw, 620px);
+      min-height: 420px;
+      padding: 48px 32px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.7);
+      border-radius: 30px;
+      box-shadow: 0 25px 70px rgba(80, 40, 70, .16);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .screen {
+      width: 100%;
+      transition: opacity .5s ease, transform .5s ease;
+    }
+
+    .screen.hidden {
+      display: none;
+    }
+
+    .screen.fade-out {
+      opacity: 0;
+      transform: scale(.96);
+    }
+
+    .error-code {
+      margin: 0;
+      font-size: clamp(5rem, 18vw, 9rem);
+      line-height: .9;
+      font-weight: 700;
+      letter-spacing: -8px;
+      color: #ff7596;
+      text-shadow: 8px 10px 0 rgba(255,117,150,.12);
+    }
+
+    h1 {
+      margin: 22px 0 8px;
+      font-size: clamp(1.7rem, 5vw, 2.5rem);
+    }
+
+    p {
+      margin: 0 auto 28px;
+      max-width: 460px;
+      line-height: 1.7;
+      color: #725766;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 28px;
+      font: 600 1rem "Poppins", sans-serif;
+      cursor: pointer;
+      transition: transform .25s ease, box-shadow .25s ease, opacity .35s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:active { transform: scale(.95); }
+
+    .refresh, .yes {
+      color: white;
+      background: linear-gradient(135deg, #ff7192, #ff4e7a);
+      box-shadow: 0 12px 25px rgba(255, 91, 127, .3);
+    }
+
+    .refresh:hover, .yes:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 30px rgba(255, 91, 127, .38);
+    }
+
+    .heart {
+      font-size: 4rem;
+      margin-bottom: 4px;
+      animation: float 2.5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      50% { transform: translateY(-8px) rotate(2deg); }
+    }
+
+    .valentine-title {
+      margin-top: 4px;
+      font-size: clamp(1.8rem, 6vw, 3rem);
+    }
+
+    .buttons {
+      position: relative;
+      min-height: 66px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .no {
+      color: #7c4d61;
+      background: rgba(255,255,255,.85);
+      box-shadow: 0 8px 20px rgba(80,40,70,.12);
+      position: relative;
+    }
+
+    .no.jumping {
+      position: fixed;
+      z-index: 20;
+      margin: 0;
+      transition: left .35s cubic-bezier(.2,.8,.2,1),
+                  top .35s cubic-bezier(.2,.8,.2,1),
+                  background .5s ease;
+    }
+
+    .agreement {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      margin-top: 0;
+      transition: max-height .7s ease, opacity .7s ease, margin-top .7s ease;
+    }
+
+    .agreement.show {
+      max-height: 280px;
+      opacity: 1;
+      margin-top: 22px;
+    }
+
+    .agreement h2 {
+      font-size: 1.15rem;
+      margin: 0 0 12px;
+    }
+
+    .agreement ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      line-height: 1.9;
+      font-size: .96rem;
+    }
+
+    .agreement li::before {
+      content: "💗 ";
+    }
+
+    .buttons.fade-buttons .yes,
+    .buttons.fade-buttons .no {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(.8);
+    }
+
+    #confetti {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 12px;
+      width: 100%;
+      text-align: center;
+      font-size: .72rem;
+      color: rgba(75,48,64,.5);
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        min-height: 390px;
+        padding: 36px 20px;
+        border-radius: 24px;
+      }
+      .buttons { gap: 12px; }
+      button { padding: 13px 23px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card" aria-live="polite">
+    <!-- Screen 1: 404 -->
+    <section id="errorScreen" class="screen">
+      <div class="error-code">404</div>
+      <h1>Page Not Found</h1>
+      <p>Oops! This page seems to have wandered off somewhere. Maybe a little refresh will help? 💫</p>
+      <button class="refresh" id="refreshBtn">Refresh</button>
+    </section>
+
+    <!-- Screen 2: Valentine -->
+    <section id="valentineScreen" class="screen hidden">
+      <div id="heart" class="heart">💔</div>
+      <h1 class="valentine-title">Will you be my Valentine?</h1>
+      <p>There may or may not be pizza involved. 🍕</p>
+
+      <div id="buttonArea" class="buttons">
+        <button class="yes" id="yesBtn">YES</button>
+        <button class="no" id="noBtn">NO</button>
+      </div>
+
+      <div id="agreement" class="agreement">
+        <h2>By clicking YES you agree to:</h2>
+        <ul>
+          <li>Unlimited cuddles</li>
+          <li>Lifetime supply of bad puns</li>
+          <li>Mutual pizza stealing rights</li>
+          <li>Effective immediately! 🚀</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="footer">made with a little bit of chaos & lots of 💕</div>
+  </main>
+
+  <canvas id="confetti"></canvas>
+
+  <script>
+    const errorScreen = document.getElementById("errorScreen");
+    const valentineScreen = document.getElementById("valentineScreen");
+    const refreshBtn = document.getElementById("refreshBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const buttonArea = document.getElementById("buttonArea");
+    const agreement = document.getElementById("agreement");
+    const heart = document.getElementById("heart");
+
+    let noClicks = 0;
+    let accepted = false;
+    let bgIndex = 0;
+
+    const backgrounds = [
+      "linear-gradient(135deg, #ffe5ec, #e9e3ff, #dff7ff)",
+      "linear-gradient(135deg, #ffd6e7, #fff0d6, #e7ddff)",
+      "linear-gradient(135deg, #dff8ff, #f5ddff, #ffe1ea)",
+      "linear-gradient(135deg, #ffe4d6, #ffd9ef, #dfeaff)",
+      "linear-gradient(135deg, #e7ffe8, #e3e1ff, #ffe1ef)"
+    ];
+
+    refreshBtn.addEventListener("click", () => {
+      errorScreen.classList.add("fade-out");
+
+      setTimeout(() => {
+        errorScreen.classList.add("hidden");
+        valentineScreen.classList.remove("hidden");
+
+        requestAnimationFrame(() => {
+          valentineScreen.classList.remove("fade-out");
+        });
+      }, 500);
+    });
+
+    yesBtn.addEventListener("click", () => {
+      if (accepted) return;
+      accepted = true;
+
+      noBtn.classList.remove("jumping");
+      noBtn.style.left = "";
+      noBtn.style.top = "";
+
+      agreement.classList.add("show");
+
+      setTimeout(() => {
+        buttonArea.classList.add("fade-buttons");
+      }, 1000);
+
+      launchConfetti();
+    });
+
+    noBtn.addEventListener("click", () => {
+      if (accepted) return;
+
+      noClicks++;
+
+      if (noClicks >= 2) {
+        heart.textContent = "😭";
+      }
+
+      bgIndex = (bgIndex + 1) % backgrounds.length;
+      document.body.style.background = backgrounds[bgIndex];
+
+      jumpNoButton();
+    });
+
+    function jumpNoButton() {
+      noBtn.classList.add("jumping");
+
+      const padding = 18;
+      const rect = noBtn.getBoundingClientRect();
+
+      const maxX = Math.max(padding, window.innerWidth - rect.width - padding);
+      const maxY = Math.max(padding, window.innerHeight - rect.height - padding);
+
+      // Avoid placing it directly under the mouse/tap area when possible.
+      let x, y;
+      for (let i = 0; i < 20; i++) {
+        x = padding + Math.random() * (maxX - padding);
+        y = padding + Math.random() * (maxY - padding);
+        if (Math.abs(x - rect.left) > 100 || Math.abs(y - rect.top) > 100) break;
+      }
+
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    window.addEventListener("resize", () => {
+      if (!accepted && noBtn.classList.contains("jumping")) {
+        const rect = noBtn.getBoundingClientRect();
+        noBtn.style.left = `${Math.min(rect.left, window.innerWidth - rect.width - 10)}px`;
+        noBtn.style.top = `${Math.min(rect.top, window.innerHeight - rect.height - 10)}px`;
+      }
+    });
+
+    // Lightweight canvas confetti — no external library required.
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    let confettiAnimation;
+    let confettiTimer;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth * devicePixelRatio;
+      canvas.height = window.innerHeight * devicePixelRatio;
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    function launchConfetti() {
+      particles = Array.from({ length: 180 }, () => ({
+        x: Math.random() * window.innerWidth,
+        y: -20 - Math.random() * window.innerHeight * .35,
+        size: 5 + Math.random() * 8,
+        speedY: 2 + Math.random() * 4,
+        speedX: -2 + Math.random() * 4,
+        rotation: Math.random() * Math.PI,
+        rotationSpeed: -.15 + Math.random() * .3,
+        gravity: .04 + Math.random() * .08,
+        shape: Math.random() > .5 ? "rect" : "circle"
+      }));
+
+      const start = performance.now();
+
+      function animate(now) {
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+        particles.forEach(p => {
+          p.x += p.speedX;
+          p.y += p.speedY;
+          p.speedY += p.gravity;
+          p.rotation += p.rotationSpeed;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rotation);
+          ctx.globalAlpha = Math.max(0, 1 - Math.max(0, now - start - 3800) / 1200);
+
+          const hue = Math.floor((p.x + p.y + now / 10) % 360);
+          ctx.fillStyle = `hsl(${hue}, 85%, 65%)`;
+
+          if (p.shape === "rect") {
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * .55);
+          } else {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        });
+
+        if (now - start < 5000) {
+          confettiAnimation = requestAnimationFrame(animate);
+        } else {
+          ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+          particles = [];
+        }
+      }
+
+      cancelAnimationFrame(confettiAnimation);
+      clearTimeout(confettiTimer);
+      confettiAnimation = requestAnimationFrame(animate);
+
+      confettiTimer = setTimeout(() => {
+        cancelAnimationFrame(confettiAnimation);
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      }, 5200);
+    }
+  </script>
+</body>
+</html>
